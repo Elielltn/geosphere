@@ -1,0 +1,51 @@
+.mainGrid {
+  max-width: 1440px;
+  width: 100%;
+  margin-inline: auto;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto auto;
+  gap: 30px;
+}
+
+.columnOne{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  
+}
+
+.flagContainer {
+  border: 2px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.infoCard {
+  border: 2px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  padding: 10px 25px;
+}
+
+.infoCard > h2 {
+  margin-bottom: 10px;
+}
+
+.resumoCard {
+  align-self: flex-start;
+  text-align: justify;
+}
+
+.dadosCard {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.algoCard {
+  grid-column: 1;
+  grid-row: 3;
+}

@@ -1,0 +1,18 @@
+.header {
+  max-width: 1440px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-inline: auto;
+  margin-top: 50px;
+}
+
+.searchBar {
+  height: 50px;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-default);
+  padding-inline: 10px;
+  color: antiquewhite;
+  border-radius: var(--radius-md);
+}

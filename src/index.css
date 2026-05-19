@@ -1,0 +1,388 @@
+/* ============================================================
+   index.css — Countries Project
+   Dark theme · Geographic/Cartographic aesthetic
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap");
+
+/* ============================================================
+   1. CSS CUSTOM PROPERTIES (DESIGN TOKENS)
+   ============================================================ */
+
+:root {
+  /* --- Colors: Backgrounds --- */
+  --color-bg-base: #0a0c10; /* fundo principal — quase preto azulado */
+  --color-bg-surface: #111318; /* cards, painéis */
+  --color-bg-elevated: #181c24; /* elementos elevados, hover */
+  --color-bg-overlay: #1e2330; /* overlays, tooltips */
+  --color-bg-subtle: #0d1017; /* seções alternadas */
+
+  /* --- Colors: Borders --- */
+  --color-border-default: #252b38;
+  --color-border-subtle: #1a1f2b;
+  --color-border-strong: #334060;
+
+  /* --- Colors: Accent (azul‑oceano / atlas) --- */
+  --color-accent-primary: #3b82f6; /* azul principal */
+  --color-accent-light: #60a5fa; /* azul claro (hover, links) */
+  --color-accent-dim: #1d4ed8; /* azul escuro (pressed) */
+  --color-accent-muted: rgba(59, 130, 246, 0.12); /* fundo tênue do accent */
+  --color-accent-glow: rgba(59, 130, 246, 0.25); /* glow/sombra colorida */
+
+  /* --- Colors: Secondary (verde‑continente) --- */
+  --color-secondary: #10b981;
+  --color-secondary-light: #34d399;
+  --color-secondary-muted: rgba(16, 185, 129, 0.1);
+
+  /* --- Colors: Text --- */
+  --color-text-primary: #e8ecf4; /* texto principal */
+  --color-text-secondary: #8b95a8; /* texto secundário / labels */
+  --color-text-muted: #4f5869; /* texto desabilitado / placeholders */
+  --color-text-inverse: #0a0c10; /* texto sobre fundo claro */
+  --color-text-accent: #60a5fa; /* texto de destaque / links */
+
+  /* --- Colors: Semantic --- */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  /* --- Colors: Map/Region palette --- */
+  --color-region-africa: #f59e0b;
+  --color-region-americas: #10b981;
+  --color-region-asia: #ef4444;
+  --color-region-europe: #3b82f6;
+  --color-region-oceania: #8b5cf6;
+
+  /* ---------------------------------------------------------- */
+  /* Typography                                                  */
+  /* ---------------------------------------------------------- */
+
+  --font-display: "Syne", sans-serif; /* headings, títulos, nav */
+  --font-body: "DM Sans", sans-serif; /* texto corrido, labels */
+  --font-mono: "JetBrains Mono", "Fira Code", monospace; /* dados/códigos */
+
+  --text-xs: 0.6875rem; /* 11px */
+  --text-sm: 0.8125rem; /* 13px */
+  --text-base: 0.9375rem; /* 15px */
+  --text-md: 1.0625rem; /* 17px */
+  --text-lg: 1.25rem; /* 20px */
+  --text-xl: 1.5rem; /* 24px */
+  --text-2xl: 2rem; /* 32px */
+  --text-3xl: 2.75rem; /* 44px */
+  --text-4xl: 3.5rem; /* 56px */
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.6;
+  --leading-loose: 1.8;
+
+  --tracking-tight: -0.03em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.05em;
+  --tracking-widest: 0.12em;
+
+  /* ---------------------------------------------------------- */
+  /* Spacing                                                     */
+  /* ---------------------------------------------------------- */
+
+  --space-1: 0.25rem; /*  4px */
+  --space-2: 0.5rem; /*  8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+  --space-16: 4rem; /* 64px */
+  --space-20: 5rem; /* 80px */
+  --space-24: 6rem; /* 96px */
+
+  /* ---------------------------------------------------------- */
+  /* Layout                                                      */
+  /* ---------------------------------------------------------- */
+
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1440px;
+
+  /* ---------------------------------------------------------- */
+  /* Border Radius                                               */
+  /* ---------------------------------------------------------- */
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 18px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ---------------------------------------------------------- */
+  /* Shadows                                                     */
+  /* ---------------------------------------------------------- */
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.7);
+  --shadow-accent: 0 4px 24px var(--color-accent-glow);
+
+  /* ---------------------------------------------------------- */
+  /* Transitions                                                 */
+  /* ---------------------------------------------------------- */
+
+  --duration-fast: 120ms;
+  --duration-normal: 220ms;
+  --duration-slow: 380ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ---------------------------------------------------------- */
+  /* Z-Index Scale                                               */
+  /* ---------------------------------------------------------- */
+
+  --z-below: -1;
+  --z-base: 0;
+  --z-raised: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+}
+
+/* ============================================================
+   2. RESET & BOX MODEL
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  tab-size: 2;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-base);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   3. TYPOGRAPHY RESET
+   ============================================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+}
+
+h1 {
+  font-size: var(--text-3xl);
+}
+h2 {
+  font-size: var(--text-2xl);
+}
+h3 {
+  font-size: var(--text-xl);
+}
+h4 {
+  font-size: var(--text-lg);
+}
+h5 {
+  font-size: var(--text-md);
+}
+h6 {
+  font-size: var(--text-base);
+}
+
+p {
+  color: var(--color-text-secondary);
+  line-height: var(--leading-normal);
+}
+
+a {
+  color: var(--color-text-accent);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+a:hover {
+  color: var(--color-accent-primary);
+}
+
+strong,
+b {
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-primary);
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+small {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+code {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  padding: 0.1em 0.4em;
+  color: var(--color-accent-light);
+}
+
+pre {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  overflow-x: auto;
+}
+
+/* ============================================================
+   4. MEDIA & ELEMENTS RESET
+   ============================================================ */
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border-default);
+  margin: var(--space-6) 0;
+}
+
+/* ============================================================
+   5. FOCUS & ACCESSIBILITY
+   ============================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ============================================================
+   6. SCROLLBAR (Webkit)
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-subtle);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* ============================================================
+   7. SELECTION
+   ============================================================ */
+
+::selection {
+  background: var(--color-accent-muted);
+  color: var(--color-accent-light);
+}
+
+/* ============================================================
+   8. ROOT APP CONTAINER
+   ============================================================ */
+
+#root {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+}
