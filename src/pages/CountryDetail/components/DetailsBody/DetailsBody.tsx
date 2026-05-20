@@ -1,13 +1,15 @@
 import styles from "./DetailsBody.module.css";
 import ReactCountryFlag from "react-country-flag";
 import type { typeCountryDetail } from "../../../../types/typeCountryDetail";
-
+import { regions, subregions } from "../../../../constants/filterOptions";
 type detailsBodyProps = {
   data: typeCountryDetail | null;
 };
 
 function DetailsBody({ data }: detailsBodyProps) {
   if (!data) return null;
+
+  const filteredSubregions = subregions.filter((s) => s.region === data.region);
 
   return (
     <main className={styles.mainGrid}>
@@ -24,8 +26,15 @@ function DetailsBody({ data }: detailsBodyProps) {
         <div className={`${styles.infoCard} ${styles.dadosCard}`}>
           <h2>Dados</h2>
           <ul>
-            <li>Região: América</li>
-            <li>Subregião: América do Sul</li>
+            <li>
+              Região:{" "}
+              {regions.find((r) => r.value === data.region)?.label ?? "-"}
+            </li>
+            <li>
+              Subregião:{" "}
+              {filteredSubregions.find((s) => s.value === data.subregion)
+                ?.label ?? "-"}
+            </li>
             <li>
               Habitantes: {data.population.toLocaleString("pt-BR")} Habitantes
             </li>
