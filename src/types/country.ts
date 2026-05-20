@@ -6,4 +6,5 @@ export type Country = {
   region: string;
   subregion: string;
   population: number;
+  independent: boolean;
 };

@@ -10,7 +10,7 @@ function Home() {
   const [subregion, setSubregion] = useState("");
   const [independent, setIndependency] = useState("");
 
-  const { countries, hasMore, loadMore } = useCountries(region, subregion);
+  const { countries, hasMore, loadMore } = useCountries(region, subregion, independent);
 
   return (
     <>

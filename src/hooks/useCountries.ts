@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import type { Country } from "../types/country";
 
-function useCountries(region: string, subregion: string) {
+function useCountries(region: string, subregion: string, independent: string) {
   const [allCountries, setAllCountries] = useState<Country[]>([]);
   const [page, setPage] = useState(1);
   const perPage = 20;
@@ -10,7 +10,7 @@ function useCountries(region: string, subregion: string) {
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
-        "https://restcountries.com/v2/all?fields=alpha2Code,translations,region,subregion,population",
+        "https://restcountries.com/v2/all?fields=alpha2Code,translations,region,subregion,population,independent",
       );
       const data = await res.json();
 
@@ -23,6 +23,7 @@ function useCountries(region: string, subregion: string) {
   const filtered = allCountries
     .filter((c) => (region ? c.region === region : true))
     .filter((c) => (subregion ? c.subregion === subregion : true))
+    .filter((c) => ( independent ? c.independent.toString() === independent : true))
     .sort((a, b) => a.translations.pt.localeCompare(b.translations.pt));
 
   const paginated = filtered.slice(0, page * perPage);
