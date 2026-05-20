@@ -14,7 +14,17 @@
   transition: border-bottom 10s;
 }
 
-.backBtn:hover {
-  cursor: pointer;
-  border-bottom: solid 1px white;
+.backBtn::after {
+  content: "";
+  position: absolute;
+  background-color: white;
+  bottom: -2px;
+  left: 0;
+  width: 0; /* começa com largura zero — invisível */
+  height: 1px;
+  transition: width 0.22s var(--ease-out);
+}
+
+.backBtn:hover::after {
+  width: 100%;
 }
