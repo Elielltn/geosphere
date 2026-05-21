@@ -9,12 +9,13 @@ function Home() {
   const [region, setRegion] = useState("");
   const [subregion, setSubregion] = useState("");
   const [independent, setIndependency] = useState("");
+  const [search, setSearch] = useState("")
 
-  const { countries, hasMore, loadMore } = useCountries(region, subregion, independent);
+  const { countries, hasMore, loadMore } = useCountries(region, subregion, independent, search);
 
   return (
     <>
-      <Header />
+      <Header onSearchChange={setSearch}/>
       <FilterBar
         onRegionChange={setRegion}
         onSubregionChange={setSubregion}

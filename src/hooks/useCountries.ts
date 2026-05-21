@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
-
 import type { Country } from "../types/country";
+import { normalizeString } from "../utils/normalize";
 
 let cache: Country[] = [];
 
-function useCountries(region: string, subregion: string, independent: string) {
+function useCountries(
+  region: string,
+  subregion: string,
+  independent: string,
+  search: string,
+) {
   const [allCountries, setAllCountries] = useState<Country[]>(cache);
   const [page, setPage] = useState(1);
   const perPage = 20;
@@ -24,11 +29,18 @@ function useCountries(region: string, subregion: string, independent: string) {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    setPage(1);
+  }, [region, subregion, independent, search]);
+
   const filtered = allCountries
     .filter((c) => (region ? c.region === region : true))
     .filter((c) => (subregion ? c.subregion === subregion : true))
     .filter((c) =>
       independent ? c.independent.toString() === independent : true,
+    )
+    .filter((c) =>
+      normalizeString(c.translations.pt).includes(normalizeString(search)),
     )
     .sort((a, b) => a.translations.pt.localeCompare(b.translations.pt));
 
