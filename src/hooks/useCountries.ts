@@ -12,6 +12,7 @@ function useCountries(
 ) {
   const [allCountries, setAllCountries] = useState<Country[]>(cache);
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(cache.length === 0)
   const perPage = 20;
 
   useEffect(() => {
@@ -24,6 +25,7 @@ function useCountries(
       const data = await res.json();
       cache = data;
       setAllCountries(data);
+      setLoading(false)
     }
 
     fetchData();
@@ -51,6 +53,7 @@ function useCountries(
     countries: paginated,
     hasMore,
     loadMore: () => setPage((p) => p + 1),
+    loading
   };
 }
 

@@ -11,7 +11,7 @@ function Home() {
   const [independent, setIndependency] = useState("");
   const [search, setSearch] = useState("")
 
-  const { countries, hasMore, loadMore } = useCountries(region, subregion, independent, search);
+  const { countries, hasMore, loadMore, loading } = useCountries(region, subregion, independent, search);
 
   return (
     <>
@@ -21,7 +21,7 @@ function Home() {
         onSubregionChange={setSubregion}
         onIndependencyChange={setIndependency}
       />
-      <CountryGrid countries={countries} hasMore={hasMore} loadMore={loadMore}/>
+      <CountryGrid loading={loading} countries={countries} hasMore={hasMore} loadMore={loadMore}/>
     </>
   );
 }
