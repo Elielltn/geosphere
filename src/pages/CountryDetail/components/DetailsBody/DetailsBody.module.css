@@ -40,6 +40,11 @@
   text-align: justify;
 }
 
+.resumoCard > p{
+  font-size: var(--text-md);
+  color: var(--color-text-primary);
+}
+
 .dadosCard {
   grid-column: 1;
   grid-row: 2;

@@ -54,7 +54,7 @@ function DetailsBody({ data }: detailsBodyProps) {
 
       <div className={`${styles.infoCard} ${styles.resumoCard}`}>
         <h2>Histórico</h2>
-        <p>teste</p>
+        <p>{data.historico ? data.historico.split("Fontes")[0] : ":) Ainda não temos o histórico desse país."}</p>
       </div>
     </main>
   );
