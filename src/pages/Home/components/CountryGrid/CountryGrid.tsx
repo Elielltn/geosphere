@@ -20,7 +20,7 @@ function CountryGrid({
       <div className={styles.countryGrid}>
         {loading ? (
           <p>Só um momento. Carregando a lista de países.</p>
-        ) : (
+        ) : countries.length > 0 ? (
           countries.map((e) => (
             <CountryCard
               key={e.alpha2Code}
@@ -31,7 +31,7 @@ function CountryGrid({
               population={e.population}
             />
           ))
-        )}
+        ) : (<p>:) Nenhum país corresponde aos filtros selecionados.</p>)}
       </div>
       {hasMore && (
         <button className={styles.loadMoreBtn} onClick={loadMore}>
