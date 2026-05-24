@@ -29,10 +29,17 @@ function FilterBar({
     onRegionChange(value);
   }
 
+  function resetFilters() {
+    setSelectedRegion(""); // ← reseta o estado interno do FilterBar
+    onRegionChange("");
+    onSubregionChange("");
+    onIndependencyChange("");
+  }
+
   return (
     <div className={styles.filterBar}>
       <h2>Filtros:</h2>
-      <select onChange={(e) => handleRegionChange(e.target.value)}>
+      <select value={selectedRegion} onChange={(e) => handleRegionChange(e.target.value)}>
         {regions.map((region) => (
           <option key={region.value} value={region.value}>
             {region.label}
@@ -56,6 +63,8 @@ function FilterBar({
           </option>
         ))}
       </select>
+
+      <button className={styles.btnClearFilters} onClick={resetFilters}>Remover filtros</button>
     </div>
   );
 }
