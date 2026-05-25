@@ -20,8 +20,6 @@
   border: 2px solid var(--color-border-default);
   border-radius: var(--radius-md);
   overflow: hidden;
-  grid-row: 1;
-  grid-column: 1;
 }
 
 .infoCard {
@@ -45,12 +43,16 @@
   color: var(--color-text-primary);
 }
 
-.dadosCard {
-  grid-column: 1;
-  grid-row: 2;
+
+
+@media (max-width: 1440px) {
+  .mainGrid {
+    padding-inline: 25px;
+  }
 }
 
-.algoCard {
-  grid-column: 1;
-  grid-row: 3;
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
 }

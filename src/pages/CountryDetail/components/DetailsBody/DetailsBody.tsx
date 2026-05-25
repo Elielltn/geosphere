@@ -42,14 +42,6 @@ function DetailsBody({ data }: detailsBodyProps) {
             <li>Capital: {data.capital}</li>
           </ul>
         </div>
-        <div className={`${styles.infoCard} ${styles.algoCard}`}>
-          <h2>Algo aí</h2>
-          <p>
-            Não sei o que colocar aqui então vou digitar um texto grande que
-            possa ser apagado mais pra frente. Espero descobrir o que colocar
-            aqui logo mais.
-          </p>
-        </div>
       </div>
 
       <div className={`${styles.infoCard} ${styles.resumoCard}`}>
