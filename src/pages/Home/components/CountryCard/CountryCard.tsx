@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./CountryCard.module.css";
 import ReactCountryFlag from "react-country-flag";
+import { subregions, regions } from "../../../../constants/filterOptions";
 
 type countryCardProps = {
   countryName: string;
@@ -18,6 +19,9 @@ function CountryCard({
   population,
 }: countryCardProps) {
   const navigate = useNavigate();
+  const filteredSubregions = subregions.filter(
+    (s) => s.region === countryRegion,
+  );
 
   return (
     <div
@@ -36,9 +40,11 @@ function CountryCard({
       <div className={styles.info}>
         <h3 className={styles.name}>{countryName}</h3>
         <div className={styles.tags}>
-          <span className={styles.region}>{countryRegion}</span>
+          <span className={styles.region}>
+            {regions.find((r) => r.value === countryRegion)?.label}
+          </span>
           <span className={styles.separator}>•</span>
-          <span className={styles.subregion}>{countrySubregion}</span>
+          <span className={styles.subregion}>{filteredSubregions.find((r) => r.value === countrySubregion)?.label}</span>
         </div>
         <p className={styles.population}>
           {population.toLocaleString("pt-BR")} hab.
