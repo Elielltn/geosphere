@@ -19,6 +19,7 @@ export const subregions = [
   { value: "", label: "Todas as sub-regiões", region: "Europe" },
   { value: "Northern Europe", label: "Europa do Norte", region: "Europe" },
   { value: "Western Europe", label: "Europa Ocidental", region: "Europe" },
+  { value: "Central Europe", label: "Europa Central", region: "Europe" },
   { value: "Eastern Europe", label: "Europa do Leste", region: "Europe" },
   { value: "Southern Europe", label: "Europa do Sul", region: "Europe" },
 
