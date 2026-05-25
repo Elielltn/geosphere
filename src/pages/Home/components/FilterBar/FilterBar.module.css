@@ -52,6 +52,18 @@
   width: 100%;
 }
 
+@media (hover: none) {
+  .btnClearFilters::after {
+    content: "";
+    position: absolute;
+    background-color: white;
+    bottom: -2px;
+    left: 0;
+    width: 100%; 
+    height: 1px;
+  }
+}
+
 @media (max-width: 1440px) {
   .filterBar {
     padding-inline: 25px;
@@ -69,6 +81,6 @@
   }
 
   .btnClearFilters {
-    width: 100%;
+    align-self: center;
   }
 }
