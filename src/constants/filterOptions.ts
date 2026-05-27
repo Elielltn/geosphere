@@ -5,6 +5,8 @@ export const regions = [
   { value: "Asia", label: "Ásia" },
   { value: "Europe", label: "Europa" },
   { value: "Oceania", label: "Oceania" },
+  { value: "Antarctic Ocean", label: "Oceano Antártico" },
+  { value: "Antarctic", label: "Antártica" },
 ];
 
 export const subregions = [
@@ -49,6 +51,13 @@ export const subregions = [
   { value: "Melanesia", label: "Melanésia", region: "Oceania" },
   { value: "Micronesia", label: "Micronésia", region: "Oceania" },
   { value: "Polynesia", label: "Polinésia", region: "Oceania" },
+
+  {
+    value: "South Antarctic Ocean",
+    label: "Oceano Antártico do Sul",
+    region: "Antarctic Ocean",
+  },
+  { value: "Antarctic", label: "Antártica", region: "Antarctic" },
 ];
 
 export const independencyOptions = [
