@@ -36,6 +36,7 @@ function Home({
       <FilterBar
         region={region}
         subregion={subregion}
+        independent={independent}
         onRegionChange={onRegionChange}
         onSubregionChange={onSubregionChange}
         onIndependencyChange={onIndependencyChange}

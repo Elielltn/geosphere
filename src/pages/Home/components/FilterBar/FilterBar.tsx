@@ -8,13 +8,16 @@ import {
 type FilterBarProps = {
   region: string;
   subregion: string;
+  independent: string;
   onRegionChange: (region: string) => void;
   onSubregionChange: (subregion: string) => void;
   onIndependencyChange: (independency: string) => void;
 };
+
 function FilterBar({
   region,
   subregion,
+  independent,
   onRegionChange,
   onSubregionChange,
   onIndependencyChange,
@@ -57,7 +60,7 @@ function FilterBar({
         </select>
       )}
 
-      <select onChange={(e) => onIndependencyChange(e.target.value)}>
+      <select value={independent} onChange={(e) => onIndependencyChange(e.target.value)}>
         {independencyOptions.map((e) => (
           <option key={e.value} value={e.value}>
             {e.label}
