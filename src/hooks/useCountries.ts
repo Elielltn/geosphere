@@ -23,8 +23,9 @@ function useCountries(
         "https://restcountries.com/v2/all?fields=alpha2Code,translations,region,subregion,population,independent",
       );
       const data = await res.json();
-      cache = data;
-      setAllCountries(data);
+      const normalized = data.map((country: Country) => ({...country, subregion: country.subregion === "North America" ? "Northern America" : country.subregion}))
+      cache = normalized;
+      setAllCountries(normalized);
       setLoading(false)
     }
 
