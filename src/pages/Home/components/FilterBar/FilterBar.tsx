@@ -7,30 +7,29 @@ import {
 } from "../../../../constants/filterOptions";
 
 type FilterBarProps = {
+  region: string;
+  subregion: string;
   onRegionChange: (region: string) => void;
   onSubregionChange: (subregion: string) => void;
   onIndependencyChange: (independency: string) => void;
 };
-
 function FilterBar({
+  region,
+  subregion,
   onRegionChange,
   onSubregionChange,
   onIndependencyChange,
 }: FilterBarProps) {
-  const [selectedRegion, setSelectedRegion] = useState("");
-
   const filteredSubregions = subregions.filter(
-    (sub) => sub.region === selectedRegion,
+    (sub) => sub.region === region,
   );
 
   function handleRegionChange(value: string) {
-    setSelectedRegion(value);
     onSubregionChange("");
     onRegionChange(value);
   }
 
   function resetFilters() {
-    setSelectedRegion(""); // ← reseta o estado interno do FilterBar
     onRegionChange("");
     onSubregionChange("");
     onIndependencyChange("");
@@ -39,15 +38,18 @@ function FilterBar({
   return (
     <div className={styles.filterBar}>
       <h2>Filtros:</h2>
-      <select value={selectedRegion} onChange={(e) => handleRegionChange(e.target.value)}>
+      <select
+        value={region}
+        onChange={(e) => handleRegionChange(e.target.value)}
+      >
         {regions.map((region) => (
           <option key={region.value} value={region.value}>
             {region.label}
           </option>
         ))}
       </select>
-      {selectedRegion && (
-        <select onChange={(e) => onSubregionChange(e.target.value)}>
+      {region && (
+        <select value={subregion} onChange={(e) => onSubregionChange(e.target.value)}>
           {filteredSubregions.map((subregion) => (
             <option key={subregion.value} value={subregion.value}>
               {subregion.label}
@@ -64,7 +66,9 @@ function FilterBar({
         ))}
       </select>
 
-      <button className={styles.btnClearFilters} onClick={resetFilters}>Remover filtros</button>
+      <button className={styles.btnClearFilters} onClick={resetFilters}>
+        Remover filtros
+      </button>
     </div>
   );
 }

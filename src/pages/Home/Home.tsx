@@ -5,27 +5,49 @@ import CountryGrid from "./components/CountryGrid/CountryGrid";
 
 import useCountries from "../../hooks/useCountries";
 
-function Home() {
-  const [region, setRegion] = useState("");
-  const [subregion, setSubregion] = useState("");
-  const [independent, setIndependency] = useState("");
-  const [search, setSearch] = useState("")
+type HomeProps = {
+  region: string;
+  subregion: string;
+  independent: string;
+  onRegionChange: (v: string) => void;
+  onSubregionChange: (v: string) => void;
+  onIndependencyChange: (v: string) => void;
+};
 
-  const { countries, hasMore, loadMore, loading } = useCountries(region, subregion, independent, search);
+function Home({
+  region,
+  subregion,
+  independent,
+  onRegionChange,
+  onSubregionChange,
+  onIndependencyChange,
+}: HomeProps) {
+  const [search, setSearch] = useState("");
+  const { countries, hasMore, loadMore, loading } = useCountries(
+    region,
+    subregion,
+    independent,
+    search,
+  );
 
   return (
     <>
-      <Header onSearchChange={setSearch}/>
+      <Header onSearchChange={setSearch} />
       <FilterBar
-        onRegionChange={setRegion}
-        onSubregionChange={setSubregion}
-        onIndependencyChange={setIndependency}
+        region={region}
+        subregion={subregion}
+        onRegionChange={onRegionChange}
+        onSubregionChange={onSubregionChange}
+        onIndependencyChange={onIndependencyChange}
       />
-      <CountryGrid loading={loading} countries={countries} hasMore={hasMore} loadMore={loadMore}/>
+      <CountryGrid
+        loading={loading}
+        countries={countries}
+        hasMore={hasMore}
+        loadMore={loadMore}
+      />
     </>
   );
 }
 
 export default Home;
-
-
