@@ -23,7 +23,7 @@ function Home({
   onIndependencyChange,
 }: HomeProps) {
   const [search, setSearch] = useState("");
-  const { countries, hasMore, loadMore, loading } = useCountries(
+  const { countries, hasMore, loadMore, loading, error } = useCountries(
     region,
     subregion,
     independent,
@@ -46,6 +46,7 @@ function Home({
         countries={countries}
         hasMore={hasMore}
         loadMore={loadMore}
+        error={error}
       />
     </>
   );

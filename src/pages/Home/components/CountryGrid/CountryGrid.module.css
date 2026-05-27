@@ -22,6 +22,14 @@
   border-radius: var(--radius-md);
 }
 
+.feedbackContainer {
+  grid-column: 1 / -1; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-16);
+}
+
 @media (max-width: 1440px) {
   .countryContainer {
     padding-inline: 25px;

@@ -7,6 +7,7 @@ type countryGridProps = {
   hasMore: boolean;
   loadMore: () => void;
   loading: boolean;
+  error: string | null;
 };
 
 function CountryGrid({
@@ -14,12 +15,19 @@ function CountryGrid({
   hasMore,
   loadMore,
   loading,
+  error,
 }: countryGridProps) {
   return (
     <div className={styles.countryContainer}>
       <div className={styles.countryGrid}>
         {loading ? (
-          <p>Só um momento. Carregando a lista de países.</p>
+          <div className={styles.feedbackContainer}>
+            <p>Só um momento. Carregando a lista de países.</p>
+          </div>
+        ) : error ? (
+          <div className={styles.feedbackContainer}>
+            <p>{error}</p>
+          </div>
         ) : countries.length > 0 ? (
           countries.map((e) => (
             <CountryCard
@@ -31,7 +39,11 @@ function CountryGrid({
               population={e.population}
             />
           ))
-        ) : (<p>:) Nenhum país corresponde aos filtros selecionados.</p>)}
+        ) : (
+          <div className={styles.feedbackContainer}>
+            <p>:( Nenhum país corresponde aos filtros selecionados.</p>
+          </div>
+        )}
       </div>
       {hasMore && (
         <button className={styles.loadMoreBtn} onClick={loadMore}>

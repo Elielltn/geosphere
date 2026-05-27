@@ -12,21 +12,32 @@ function useCountries(
 ) {
   const [allCountries, setAllCountries] = useState<Country[]>(cache);
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(cache.length === 0)
+  const [loading, setLoading] = useState(cache.length === 0);
+  const [error, setError] = useState("");
   const perPage = 20;
 
   useEffect(() => {
     if (cache.length > 0) return;
 
     async function fetchData() {
-      const res = await fetch(
-        "https://restcountries.com/v2/all?fields=alpha2Code,translations,region,subregion,population,independent",
-      );
-      const data = await res.json();
-      const normalized = data.map((country: Country) => ({...country, subregion: country.subregion === "North America" ? "Northern America" : country.subregion}))
-      cache = normalized;
-      setAllCountries(normalized);
-      setLoading(false)
+      try {
+        const res = await fetch(
+          "https://restcountries.com/v2/all?fields=alpha2Code,translations,region,subregion,population,independent",
+        );
+        const data = await res.json();
+        const normalized = data.map((country: Country) => ({
+          ...country,
+          subregion:
+            country.subregion === "North America"
+              ? "Northern America"
+              : country.subregion,
+        }));
+        cache = normalized;
+        setAllCountries(normalized);
+        setLoading(false);
+      } catch (err) {
+        setError("Não foi possível carregar os países. Tente novamente");
+      }
     }
 
     fetchData();
@@ -54,7 +65,8 @@ function useCountries(
     countries: paginated,
     hasMore,
     loadMore: () => setPage((p) => p + 1),
-    loading
+    loading,
+    error,
   };
 }
 
