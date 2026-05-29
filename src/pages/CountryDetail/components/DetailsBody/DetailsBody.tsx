@@ -46,7 +46,7 @@ function DetailsBody({ data }: detailsBodyProps) {
               {regions.find((r) => r.value === data.region)?.label ?? "-"}
             </li>
             <li>
-              Subregião:{" "}
+              Sub-região:{" "}
               {filteredSubregions.find((s) => s.value === data.subregion)
                 ?.label ?? "-"}
             </li>
