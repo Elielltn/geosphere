@@ -2,6 +2,10 @@
 
 Aplicação web para explorar informações sobre países do mundo. Permite buscar, filtrar por região, sub-região e independência, e visualizar detalhes de cada país.
 
+## 🔗 Demo
+
+[geosphere.vercel.app](https://geosphere-one.vercel.app/)
+
 ## Tecnologias
 
 - React 19
