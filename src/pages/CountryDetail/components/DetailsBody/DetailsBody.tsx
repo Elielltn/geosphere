@@ -11,6 +11,21 @@ function DetailsBody({ data }: detailsBodyProps) {
 
   const filteredSubregions = subregions.filter((s) => s.region === data.region);
 
+  const languageNames = new Intl.DisplayNames(["pt-BR"], { type: "language" });
+
+  const translatedLanguages = data.languages
+    .map((l) => {
+      const tranlatedLanguage = languageNames.of(l.iso639_1);
+
+      if (tranlatedLanguage == undefined) return null;
+
+      return (
+        tranlatedLanguage.charAt(0).toUpperCase() + tranlatedLanguage.slice(1)
+      );
+    })
+    .filter(Boolean)
+    .join(", ");
+
   return (
     <main className={styles.mainGrid}>
       <div className={styles.columnOne}>
@@ -40,13 +55,18 @@ function DetailsBody({ data }: detailsBodyProps) {
             </li>
             <li>Território: {data.area.toLocaleString("pt-BR")} km²</li>
             <li>Capital: {data.capital}</li>
+            <li>Idiomas: {translatedLanguages || "-"}</li>
           </ul>
         </div>
       </div>
 
       <div className={`${styles.infoCard} ${styles.resumoCard}`}>
         <h2>Histórico</h2>
-        <p>{data.historico ? data.historico.split("Fontes")[0] : ":) Ainda não temos o histórico desse país."}</p>
+        <p>
+          {data.historico
+            ? data.historico.split("Fontes")[0]
+            : ":) Ainda não temos o histórico desse país."}
+        </p>
       </div>
     </main>
   );

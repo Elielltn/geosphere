@@ -9,4 +9,10 @@ export type typeCountryDetail = {
   population: number;
   capital: string;
   historico: string;
+  languages: {
+    iso639_1: string;
+    iso639_2: string;
+    name: string;
+    nativeName: string;
+  }[];
 };
