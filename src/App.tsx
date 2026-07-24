@@ -7,7 +7,7 @@ import { useState } from "react";
 function App() {
   const [region, setRegion] = useState("");
   const [subregion, setSubregion] = useState("");
-  const [independent, setIndependency] = useState("");
+  const [independency, setIndependency] = useState("");
 
   return (
     <BrowserRouter>
@@ -18,7 +18,7 @@ function App() {
             <Home
               region={region}
               subregion={subregion}
-              independent={independent}
+              independency={independency}
               onRegionChange={setRegion}
               onSubregionChange={setSubregion}
               onIndependencyChange={setIndependency}

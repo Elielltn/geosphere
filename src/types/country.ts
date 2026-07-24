@@ -1,10 +1,19 @@
 export type Country = {
-  translations: {
-    pt: string;
+  names: {
+    translations: {
+      por: {
+        common: string;
+        official: string;
+      };
+    };
   };
-  alpha2Code: string;
+  codes: {
+    alpha_2: string;
+  };
   region: string;
   subregion: string;
+  classification: {
+    dependency: boolean;
+  };
   population: number;
-  independent: boolean;
 };

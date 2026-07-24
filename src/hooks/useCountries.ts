@@ -4,12 +4,42 @@ import { normalizeString } from "../utils/normalize";
 
 let cache: Country[] = [];
 
+async function fetchAllCountries(): Promise<Country[]> {
+  let allData: Country[] = [];
+  let offset = 0;
+  const limit = 100;
+  let more = true;
+
+  while (more) {
+    const res = await fetch(
+      `https://api.restcountries.com/countries/v5?response_fields=codes.alpha_2,names.translations.por,region,subregion,population,classification.dependency&limit=${limit}&offset=${offset}`,
+      {
+        headers: {
+          Authorization: "Bearer rc_live_2b804d3c087e4bbe99a70d34d7c7250d",
+        },
+      },
+    );
+    const json = await res.json();
+    allData = [...allData, ...json.data.objects];
+    more = json.data.meta.more;
+    offset += limit;
+  }
+
+  return allData;
+}
+
 function useCountries(
   region: string,
   subregion: string,
-  independent: string,
+  independency: string,
   search: string,
 ) {
+  const [prevFilters, setPrevFilters] = useState({
+    region,
+    subregion,
+    independency,
+    search,
+  });
   const [allCountries, setAllCountries] = useState<Country[]>(cache);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(cache.length === 0);
@@ -21,21 +51,11 @@ function useCountries(
 
     async function fetchData() {
       try {
-        const res = await fetch(
-          "https://restcountries.com/v2/all?fields=alpha2Code,translations,region,subregion,population,independent",
-        );
-        const data = await res.json();
-        const normalized = data.map((country: Country) => ({
-          ...country,
-          subregion:
-            country.subregion === "North America"
-              ? "Northern America"
-              : country.subregion,
-        }));
-        cache = normalized;
-        setAllCountries(normalized);
+        const data = await fetchAllCountries();
+        cache = data;
+        setAllCountries(data);
         setLoading(false);
-      } catch (err) {
+      } catch {
         setError("Não foi possível carregar os países. Tente novamente");
       }
     }
@@ -43,20 +63,34 @@ function useCountries(
     fetchData();
   }, []);
 
-  useEffect(() => {
+  if (
+    prevFilters.region !== region ||
+    prevFilters.subregion !== subregion ||
+    prevFilters.independency !== independency ||
+    prevFilters.search !== search
+  ) {
+    setPrevFilters({ region, subregion, independency, search });
     setPage(1);
-  }, [region, subregion, independent, search]);
+  }
 
   const filtered = allCountries
     .filter((c) => (region ? c.region === region : true))
     .filter((c) => (subregion ? c.subregion === subregion : true))
     .filter((c) =>
-      independent ? c.independent.toString() === independent : true,
+      independency
+        ? c.classification.dependency.toString() === independency
+        : true,
     )
     .filter((c) =>
-      normalizeString(c.translations.pt).includes(normalizeString(search)),
+      normalizeString(c.names.translations.por.official).includes(
+        normalizeString(search),
+      ),
     )
-    .sort((a, b) => a.translations.pt.localeCompare(b.translations.pt));
+    .sort((a, b) =>
+      a.names.translations.por.official.localeCompare(
+        b.names.translations.por.official,
+      ),
+    );
 
   const paginated = filtered.slice(0, page * perPage);
   const hasMore = paginated.length < filtered.length;

@@ -62,6 +62,6 @@ export const subregions = [
 
 export const independencyOptions = [
   { value: "", label: "Todos" },
-  { value: "true", label: "Independente" },
-  { value: "false", label: "Dependente" },
+  { value: "false", label: "Independente" },
+  { value: "true", label: "Dependente" },
 ];

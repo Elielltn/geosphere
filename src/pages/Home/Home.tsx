@@ -8,7 +8,7 @@ import useCountries from "../../hooks/useCountries";
 type HomeProps = {
   region: string;
   subregion: string;
-  independent: string;
+  independency: string;
   onRegionChange: (v: string) => void;
   onSubregionChange: (v: string) => void;
   onIndependencyChange: (v: string) => void;
@@ -17,7 +17,7 @@ type HomeProps = {
 function Home({
   region,
   subregion,
-  independent,
+  independency,
   onRegionChange,
   onSubregionChange,
   onIndependencyChange,
@@ -26,7 +26,7 @@ function Home({
   const { countries, hasMore, loadMore, loading, error } = useCountries(
     region,
     subregion,
-    independent,
+    independency,
     search,
   );
 
@@ -36,7 +36,7 @@ function Home({
       <FilterBar
         region={region}
         subregion={subregion}
-        independent={independent}
+        independency={independency}
         onRegionChange={onRegionChange}
         onSubregionChange={onSubregionChange}
         onIndependencyChange={onIndependencyChange}
