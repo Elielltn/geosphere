@@ -31,7 +31,11 @@ function CountryGrid({
         ) : countries.length > 0 ? (
           countries.map((e) => (
             <CountryCard
-              key={e.codes.alpha_2}
+              key={
+                e.codes.alpha_2
+                  ? e.codes.alpha_2
+                  : e.names.translations.por.common
+              }
               countryName={e.names.translations.por.common}
               countryCode={e.codes.alpha_2}
               countryRegion={e.region}

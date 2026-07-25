@@ -25,7 +25,7 @@ export type typeCountryDetail = {
     iso639_1: string;
     iso639_2b: string;
     name: string;
-    native_name: string; // ← minúsculo com underline, não nativeName
+    native_name: string;
   }[];
-  historico: string; // continua vindo do IBGE, não da REST Countries
+  historico: string;
 };
