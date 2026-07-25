@@ -31,10 +31,10 @@ function DetailsBody({ data }: detailsBodyProps) {
       <div className={styles.columnOne}>
         <div className={styles.flagContainer}>
           <ReactCountryFlag
-            countryCode={`${data.alpha2Code}`}
+            countryCode={`${data.codes.alpha_2}`}
             svg
             style={{ width: "100%", height: "100%" }}
-            title={`${data.translations.pt}`}
+            title={`${data.names.translations.por.common}`}
           />
         </div>
 
@@ -53,8 +53,12 @@ function DetailsBody({ data }: detailsBodyProps) {
             <li>
               Habitantes: {data.population.toLocaleString("pt-BR")} Habitantes
             </li>
-            <li>Território: {data.area.toLocaleString("pt-BR")} km²</li>
-            <li>Capital: {data.capital}</li>
+            <li>
+              Território: {data.area.kilometers.toLocaleString("pt-BR")} km²
+            </li>
+            {data.capitals.map((c) => (
+              <li>Capital: {c.name}</li>
+            ))}
             <li>Idiomas: {translatedLanguages || "-"}</li>
           </ul>
         </div>

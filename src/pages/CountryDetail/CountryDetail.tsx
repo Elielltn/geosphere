@@ -15,12 +15,21 @@ function CountryDetail() {
     async function fetchDetails() {
       try {
         const [res1, res2] = await Promise.all([
-          fetch(`https://restcountries.com/v2/alpha/${code}`),
+          fetch(
+            `https://api.restcountries.com/countries/v5/codes.alpha_2/${code}`,
+            {
+              headers: {
+                Authorization:
+                  "Bearer rc_live_2b804d3c087e4bbe99a70d34d7c7250d",
+              },
+            },
+          ),
           fetch(`https://servicodados.ibge.gov.br/api/v1/paises/${code}`),
         ]);
         const [json1, json2] = await Promise.all([res1.json(), res2.json()]);
+        const countryData = json1.data.objects[0];
         setLoading(false);
-        setData({ ...json1, historico: json2[0]?.historico ?? "" });
+        setData({ ...countryData, historico: json2[0]?.historico ?? "" });
       } catch {
         setLoading(false);
         setError("Não foi possível mostrar os dados do país. Tente novamente!");
@@ -36,7 +45,8 @@ function CountryDetail() {
         countryName={
           error
             ? "Erro"
-            : (data?.translations.pt ?? "Buscando os dados do país...")
+            : (data?.names.translations.por.common ??
+              "Buscando os dados do país...")
         }
       />
       {loading ? (

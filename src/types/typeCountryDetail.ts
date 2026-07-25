@@ -1,18 +1,31 @@
 export type typeCountryDetail = {
-  translations: {
-    pt: string;
+  names: {
+    common: string;
+    official: string;
+    translations: {
+      por: {
+        common: string;
+        official: string;
+      };
+    };
   };
-  area: number;
-  alpha2Code: string;
+  codes: {
+    alpha_2: string;
+  };
+  area: {
+    kilometers: number;
+  };
   region: string;
   subregion: string;
+  capitals: {
+    name: string;
+  }[];
   population: number;
-  capital: string;
-  historico: string;
   languages: {
     iso639_1: string;
-    iso639_2: string;
+    iso639_2b: string;
     name: string;
-    nativeName: string;
+    native_name: string; // ← minúsculo com underline, não nativeName
   }[];
+  historico: string; // continua vindo do IBGE, não da REST Countries
 };

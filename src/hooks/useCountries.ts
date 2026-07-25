@@ -82,13 +82,13 @@ function useCountries(
         : true,
     )
     .filter((c) =>
-      normalizeString(c.names.translations.por.official).includes(
+      normalizeString(c.names.translations.por.common).includes(
         normalizeString(search),
       ),
     )
     .sort((a, b) =>
-      a.names.translations.por.official.localeCompare(
-        b.names.translations.por.official,
+      a.names.translations.por.common.localeCompare(
+        b.names.translations.por.common,
       ),
     );
 
