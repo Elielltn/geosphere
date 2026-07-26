@@ -17,7 +17,7 @@
   font-family: var(--font-body);
   font-size: var(--text-sm);
   cursor: pointer;
-  appearance: none; /* remove a setinha padrão do SO */
+  appearance: none; 
   transition:
     border-color var(--duration-fast) var(--ease-out),
     background-color var(--duration-fast) var(--ease-out);
