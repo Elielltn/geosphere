@@ -15,12 +15,12 @@ function DetailsBody({ data }: detailsBodyProps) {
 
   const translatedLanguages = data.languages
     .map((l) => {
-      const tranlatedLanguage = languageNames.of(l.iso639_1);
+      const translatedLanguage = languageNames.of(l.iso639_2b);
 
-      if (tranlatedLanguage == undefined) return null;
+      if (translatedLanguage == undefined) return null;
 
       return (
-        tranlatedLanguage.charAt(0).toUpperCase() + tranlatedLanguage.slice(1)
+        translatedLanguage.charAt(0).toUpperCase() + translatedLanguage.slice(1)
       );
     })
     .filter(Boolean)
@@ -56,9 +56,13 @@ function DetailsBody({ data }: detailsBodyProps) {
             <li>
               Território: {data.area.kilometers.toLocaleString("pt-BR")} km²
             </li>
-            {data.capitals.map((c) => (
-              <li>Capital: {c.name}</li>
-            ))}
+            {data.capitals.length > 1
+              ? `Capitais: ${data.capitals
+                  .map((c) => {
+                    return c.name;
+                  })
+                  .join(", ")}`
+              : `Capital: ${data.capitals[0].name}`}
             <li>Idiomas: {translatedLanguages || "-"}</li>
           </ul>
         </div>
