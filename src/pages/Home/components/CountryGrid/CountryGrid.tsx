@@ -36,6 +36,7 @@ function CountryGrid({
                   ? e.codes.alpha_2
                   : e.names.translations.por.common
               }
+              countryCommonName={e.codes.alpha_2 ? "" : e.names.common}
               countryName={e.names.translations.por.common}
               countryCode={e.codes.alpha_2}
               countryRegion={e.region}

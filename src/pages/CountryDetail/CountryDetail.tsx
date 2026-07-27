@@ -15,6 +15,9 @@ function CountryDetail() {
 
   useEffect(() => {
     async function fetchDetails() {
+      if (!code) {
+        return;
+      }
       try {
         const [res1, res2] = await Promise.all([
           fetch(`${API_URL}/api/countries/${code}`),
@@ -23,7 +26,10 @@ function CountryDetail() {
         const [json1, json2] = await Promise.all([res1.json(), res2.json()]);
         const countryData = json1;
         setLoading(false);
-        setData({ ...countryData, historico: json2[0]?.historico ?? "" });
+        setData({
+          ...countryData,
+          historico: code?.length > 2 ? "" : (json2[0]?.historico ?? ""),
+        });
       } catch {
         setLoading(false);
         setError("Não foi possível mostrar os dados do país. Tente novamente!");

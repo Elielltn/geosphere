@@ -4,6 +4,7 @@ import ReactCountryFlag from "react-country-flag";
 import { subregions, regions } from "../../../../constants/filterOptions";
 
 type countryCardProps = {
+  countryCommonName: string;
   countryName: string;
   countryCode: string;
   countryRegion: string;
@@ -12,6 +13,7 @@ type countryCardProps = {
 };
 
 function CountryCard({
+  countryCommonName,
   countryName,
   countryCode,
   countryRegion,
@@ -26,7 +28,11 @@ function CountryCard({
   return (
     <div
       className={styles.card}
-      onClick={() => navigate(`/country/${countryCode}`)}
+      onClick={
+        countryCode
+          ? () => navigate(`/country/${countryCode}`)
+          : () => navigate(`/country/${countryCommonName}`)
+      }
     >
       {countryCode ? (
         <div className={styles.flagContainer}>
@@ -39,7 +45,14 @@ function CountryCard({
         </div>
       ) : (
         <div className={styles.flagContainer}>
-          <div style={{ width: "100%", height: "100%", backgroundColor: "#090a0c" }} title={countryName} />
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              backgroundColor: "#090a0c",
+            }}
+            title={countryName}
+          />
         </div>
       )}
 

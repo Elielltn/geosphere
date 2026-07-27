@@ -1,5 +1,6 @@
 export type Country = {
   names: {
+    common: string;
     translations: {
       por: {
         common: string;

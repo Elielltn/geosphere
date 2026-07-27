@@ -37,14 +37,34 @@ function DetailsBody({ data }: detailsBodyProps) {
   return (
     <main className={styles.mainGrid}>
       <div className={styles.columnOne}>
-        <div className={styles.flagContainer}>
-          <ReactCountryFlag
-            countryCode={`${data.codes.alpha_2}`}
-            svg
-            style={{ width: "100%", height: "100%" }}
-            title={`${data.names.translations.por.common}`}
-          />
-        </div>
+        {data.codes.alpha_2 ? (
+          <div className={styles.flagContainer}>
+            <ReactCountryFlag
+              countryCode={`${data.codes.alpha_2}`}
+              svg
+              style={{ width: "100%", height: "100%" }}
+              title={`${data.names.translations.por.common}`}
+            />
+          </div>
+        ) : (
+          <div
+            style={{
+              width: "705px",
+              height: "523px",
+              backgroundColor: "#090a0c",
+            }}
+            className={styles.flagContainer}
+          >
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                backgroundColor: "#090a0c",
+              }}
+              title={`${data.names.translations.por.common}`}
+            />
+          </div>
+        )}
 
         <div className={`${styles.infoCard} ${styles.dadosCard}`}>
           <h2>Dados</h2>
