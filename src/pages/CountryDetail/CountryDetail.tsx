@@ -5,29 +5,23 @@ import DetailsBody from "./components/DetailsBody/DetailsBody";
 import { useEffect, useState } from "react";
 import type { typeCountryDetail } from "../../types/typeCountryDetail";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function CountryDetail() {
   const { code } = useParams();
   const [data, setData] = useState<typeCountryDetail | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     async function fetchDetails() {
       try {
         const [res1, res2] = await Promise.all([
-          fetch(
-            `https://api.restcountries.com/countries/v5/codes.alpha_2/${code}`,
-            {
-              headers: {
-                Authorization:
-                  "Bearer rc_live_2b804d3c087e4bbe99a70d34d7c7250d",
-              },
-            },
-          ),
+          fetch(`${API_URL}/api/countries/${code}`),
           fetch(`https://servicodados.ibge.gov.br/api/v1/paises/${code}`),
         ]);
         const [json1, json2] = await Promise.all([res1.json(), res2.json()]);
-        const countryData = json1.data.objects[0];
+        const countryData = json1;
         setLoading(false);
         setData({ ...countryData, historico: json2[0]?.historico ?? "" });
       } catch {

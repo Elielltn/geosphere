@@ -4,26 +4,12 @@ import { normalizeString } from "../utils/normalize";
 
 let cache: Country[] = [];
 
-async function fetchAllCountries(): Promise<Country[]> {
-  let allData: Country[] = [];
-  let offset = 0;
-  const limit = 100;
-  let more = true;
+const API_URL = import.meta.env.VITE_API_URL;
 
-  while (more) {
-    const res = await fetch(
-      `https://api.restcountries.com/countries/v5?response_fields=codes.alpha_2,names.translations.por,region,subregion,population,classification.dependency&limit=${limit}&offset=${offset}`,
-      {
-        headers: {
-          Authorization: "Bearer rc_live_2b804d3c087e4bbe99a70d34d7c7250d",
-        },
-      },
-    );
-    const json = await res.json();
-    allData = [...allData, ...json.data.objects];
-    more = json.data.meta.more;
-    offset += limit;
-  }
+async function fetchAllCountries(): Promise<Country[]> {
+  const res = await fetch(`${API_URL}/api/countries`);
+  const json = await res.json();
+  const allData = json;
 
   return allData;
 }
