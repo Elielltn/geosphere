@@ -15,7 +15,15 @@ function DetailsBody({ data }: detailsBodyProps) {
 
   const translatedLanguages = data.languages
     .map((l) => {
-      const translatedLanguage = languageNames.of(l.iso639_2b);
+      const translatedLanguage = languageNames.of(
+        l.bcp47 ||
+          l.iso639_1 ||
+          l.iso639_2b ||
+          l.iso639_2t ||
+          l.iso639_3 ||
+          l.name ||
+          l.native_name,
+      );
 
       if (translatedLanguage == undefined) return null;
 

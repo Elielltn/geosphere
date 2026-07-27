@@ -22,8 +22,11 @@ export type typeCountryDetail = {
   }[];
   population: number;
   languages: {
+    bcp47: string;
     iso639_1: string;
     iso639_2b: string;
+    iso639_2t: string;
+    iso639_3: string;
     name: string;
     native_name: string;
   }[];
