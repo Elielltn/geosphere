@@ -28,14 +28,20 @@ function CountryCard({
       className={styles.card}
       onClick={() => navigate(`/country/${countryCode}`)}
     >
-      <div className={styles.flagContainer}>
-        <ReactCountryFlag
-          countryCode={countryCode}
-          svg
-          style={{ width: "100%", height: "100%" }}
-          title={countryName}
-        />
-      </div>
+      {countryCode ? (
+        <div className={styles.flagContainer}>
+          <ReactCountryFlag
+            countryCode={countryCode}
+            svg
+            style={{ width: "100%", height: "100%" }}
+            title={countryName}
+          />
+        </div>
+      ) : (
+        <div className={styles.flagContainer}>
+          <div style={{ width: "100%", height: "100%", backgroundColor: "#090a0c" }} title={countryName} />
+        </div>
+      )}
 
       <div className={styles.info}>
         <h3 className={styles.name}>{countryName}</h3>
@@ -44,7 +50,12 @@ function CountryCard({
             {regions.find((r) => r.value === countryRegion)?.label}
           </span>
           <span className={styles.separator}>•</span>
-          <span className={styles.subregion}>{filteredSubregions.find((r) => r.value === countrySubregion)?.label}</span>
+          <span className={styles.subregion}>
+            {
+              filteredSubregions.find((r) => r.value === countrySubregion)
+                ?.label
+            }
+          </span>
         </div>
         <p className={styles.population}>
           {population.toLocaleString("pt-BR")} hab.
